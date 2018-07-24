@@ -1,0 +1,205 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AllTech Video Finder</title>
+	<link rel="stylesheet" href="style.css" />
+	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+</head>
+<body>
+	<div>
+		<div id='tf'>
+			<div class='tags'>
+				<img src='images/logo.png' id='logo'></img>
+			</div>
+			
+		</div>
+		<div class='results'>
+			
+		</div>
+	</div>
+</body>
+</html>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+var selectedElems = [];
+var selectedTags = [];
+var showSelElems = function() {
+	
+	var results = $('.results');
+	results.empty();
+	for(var i = 0; i < selectedElems.length; i++) {
+	
+		var elem = selectedElems[i];
+		var txt = "<p><a target='_blank' href='" + elem.url + "'>"+ elem.title +"</a></p>";
+		results.append(txt);
+	}
+}
+
+var videoLink = function(title, url, tags, en, inv, lang) {
+
+	this.title = title;
+	this.url = url;
+	this.tags = tags.split(',');
+	this.ens = en.split(',');
+	this.invs	= inv.split(',');
+	this.lang = lang !== undefined ? lang.trim() : '';
+}
+
+var vls = [
+new videoLink('horsepower to watts in python', 'https://youtu.be/RykjCHW976s', 'programming,watts', '123,94', 'rabanets', 'python'),
+new videoLink('clear screen in python', 'https://youtu.be/VAStmLsFQZ8', 'python,programming,clear', '', ''),
+new videoLink('file size in python', 'https://youtu.be/KVI8KWuzaRI', 'python,programming,files', '', ''),
+new videoLink('fibonacci recursive in python', 'https://youtu.be/jXAIk1DLfc0', 'python,programming,recursive', '', ''),
+new videoLink('print calendar in python', 'https://youtu.be/pDuLuZD923Q', 'python,programming, calendar', '', ''),
+new videoLink('inches to centimeters in python', 'https://youtu.be/2AzgM11vxMk', 'python,programming,inches', '', ''),
+new videoLink('solve hanoi towers in python', 'https://youtu.be/Qz3Av4xVBKY', 'python,programming,hanoi', '', ''),
+new videoLink('days between dates in python', 'https://youtu.be/4cEHbjSyGUQ', 'python,programming', '', ''),
+new videoLink('distance between point in python', 'https://youtu.be/dcLNoTnTn58', 'python,programming', '', ''),
+new videoLink('simple interest in python', 'https://youtu.be/138vS7lrrcQ', 'python,programming', '', ''),
+new videoLink('product of numbers list v1 in python', 'https://youtu.be/T7yROuVV1sw', 'python,programming', '', ''),
+new videoLink('factorial iterative in python', 'https://youtu.be/XEbhgNgMHLw', 'python,programming', '', ''),
+new videoLink('display current date and time in python', 'https://youtu.be/qKam7CRRBio', 'python,programming', '', ''),
+new videoLink('triangular number recursive in python', 'https://youtu.be/T-eh2r-OCNs', 'python,programming,recursive', '', ''),
+new videoLink('characters frequency in python', 'https://youtu.be/ffZY1hHklD0', 'python,programming,string', '', ''),
+new videoLink('body mass index in python', 'https://youtu.be/L0wHhMnv_KA', 'python,programming', '', ''),
+new videoLink('simple logger decorator in python', 'https://youtu.be/PlEDfjM7QOs', 'python,programming', '', ''),
+new videoLink('triangular number iterative in python', 'https://youtu.be/R5LBFKMNiL4', 'python,programming', '', ''),
+new videoLink('tridiagonal matrix in python', 'https://youtu.be/eYjzFUbMmKc', 'python,programming', '', ''),
+new videoLink('find max and min in python', 'https://youtu.be/ex6zuRzeU7g', 'python,programming', '', ''),
+new videoLink('watts to horsepower in python', 'https://youtu.be/sW2yL5KFdHQ', 'python,programming', '', ''),
+new videoLink('print 10 to 1 recursive in python', 'https://youtu.be/0OFcn4IZ0FE', 'python,programming', '', ''),
+new videoLink('numbers starts with digit 3 in python', 'https://youtu.be/4bGuclyFYcI', 'python,programming', '', ''),
+new videoLink('method call statistics in python', 'https://youtu.be/JFQiG6b-LCM', 'python,programming', '', ''),
+new videoLink('get os user name in python', 'https://youtu.be/KVWtsfLL0WU', 'python,programming', '', ''),
+new videoLink('generate 2 dimensional list in python', 'https://youtu.be/L8rV_HmT3jw', 'python,programming', '', ''),
+new videoLink('bitwise addition in python', 'https://youtu.be/MyyJ05KtHoA', 'python,programming', '', ''),
+new videoLink('get python version', 'https://youtu.be/Nm8nyo7UCxY', 'python,programming', '', ''),
+new videoLink('odd numbers with at least 3 digit 2 in python', 'https://youtu.be/O4FLnhUcftQ', 'python,programming', '', ''),
+new videoLink('pascals triangle v2 in python', 'https://youtu.be/Pr3IhBfnoJ4', 'python,programming', '', ''),
+
+]
+
+var tags = {};
+var ens = {};
+var invs = {};
+var langs = {}
+
+for(var i = 0; i < vls.length; i++) {
+
+	var vl = vls[i];
+	
+	var lang = vl.lang;
+	
+	if(langs[lang] == undefined) {
+		langs[lang] = [];
+	}
+	
+	langs[lang].push(vl);	
+	
+	for(var j = 0; j < vl.tags.length; j++) {
+	
+		var tag = vl.tags[j].trim();
+		
+		if(tags[tag] == undefined) {
+			tags[tag] = [];
+		}
+		
+		tags[tag].push(vl);
+	}
+	
+	for(var j = 0; j < vl.ens.length; j++) {
+	
+		var en = vl.ens[j].trim();
+		
+		if(ens[en] == undefined) {
+			ens[en] = [];
+		}
+		
+		ens[en].push(vl);
+	}
+
+	for(var j = 0; j < vl.invs.length; j++) {
+	
+		var inv = vl.invs[j].trim();
+		
+		if(invs[inv] == undefined) {
+			invs[inv] = [];
+		}
+		
+		invs[inv].push(vl);
+	}			
+}
+
+var tagsDiv = $('.tags');
+
+Object.keys(tags).forEach(function(key) {
+	
+	var txt = $("<div class='tag'>" + key + "</div>");
+	txt.click(function() { 
+		var key = this.innerText;
+		
+		if($(this).hasClass("active")) {
+		
+			$(this).removeClass("active");	
+			
+			var tagIdx = selectedTags.indexOf(key);
+			if(tagIdx !== -1) {
+			
+				selectedTags.splice(tagIdx, 1);
+				selectedElems = [];
+				
+				for(var i = 0; i < selectedTags.length; i++) {
+				
+					var skey = selectedTags[i];
+					var toAdd = tags[skey];
+					
+					for(var j = 0; j < toAdd.length; j++) {
+					
+						const idx = selectedElems.indexOf(toAdd[j]);
+						
+						if(idx === -1) {
+						
+							selectedElems.push(toAdd[j]);
+						}
+					}
+				}
+			}
+		}
+		else {
+		
+			$(this).addClass("active");
+			
+			var toAdd = tags[key];
+			selectedTags.push(key);
+			
+			for(var i = 0; i < toAdd.length; i++) {
+			
+				const idx = selectedElems.indexOf(toAdd[i]);
+				
+				if(idx === -1) {
+				
+					selectedElems.push(toAdd[i]);
+				}
+			}		
+		}
+		showSelElems();
+	});
+	tagsDiv.append(txt);
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
