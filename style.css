@@ -17,9 +17,9 @@ a:visited {
 }
 a{color:white; text-decoration: none;}
 #logo { float:right; padding-top: 50px; padding-right: 100px; height: auto;   width: 10%;} 
-.tags { margin-bottom: 10px; }
+.tags { margin-bottom: 10px; font-size: 0.7em;}
 .results { clear:both; padding-top: 200px; }
-.tag { float:left; margin-right: 40px; padding:5px; margin-bottom: 3px; }
+.tag { float:left; margin-right: 20px; padding:5px; margin-bottom: 3px; }
 .tag:hover {
 	color: #DC143C;
 	text-shadow: 2px 0 0 orange, -2px 0 0 orange, 0 2px 0 orange, 0 -2px 0 orange, 2px 2px orange, -2px -2px 0 orange, 2px -2px 0 orange, -2px 2px 0 orange;
@@ -30,7 +30,6 @@ a{color:white; text-decoration: none;}
 
 	color: #DC143C;
 	text-shadow: 2px 0 0 orange, -2px 0 0 orange, 0 2px 0 orange, 0 -2px 0 orange, 2px 2px orange, -2px -2px 0 orange, 2px -2px 0 orange, -2px 2px 0 orange;
-	letter-spacing: 3px;
 	background-color: orange;
 	padding:5px;
 }
