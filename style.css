@@ -16,8 +16,8 @@ a:visited {
     color: #c25a2e ;
 }
 a{color:white; text-decoration: none;}
-#logo { float:right; padding-top: 50px; padding-right: 100px; height: auto;   width: 10%;} 
-.tags { margin-bottom: 10px; font-size: 0.7em;}
+#logo { float:right; padding-top: 50px; padding-right: 2%; height: auto;   width: 8%;} 
+.tags { margin-bottom: 10px; font-size: 0.7em; float:left; width:90%; }
 .results { clear:both; padding-top: 200px; }
 .tag { float:left; margin-right: 20px; padding:5px; margin-bottom: 3px; }
 .tag:hover {
